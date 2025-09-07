@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.dropdown{
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        display: none;
+    }
+    .dropdown {
+        display: block;
+    }
+    .logo h1{
+        font-size: 1.2rem !important;
+    }
+    .menu-icon{
+        display: block;
+        cursor: pointer;
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+
+
+    .herobanner{
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+    .herobanner img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+    }
+    .herobanner h1{
+        font-size: 1.8rem !important;
+    }
+    .herobanner p{
+        font-size: 0.9rem !important;
+    }
+    .herobanner button{
+        width: 30% !important;
+        margin: 10px auto;
+        font-size: 11px;
+        padding: 10px 14px;
+        
+    }
+    .sideleaf{
+        display: none;
+    }
+}

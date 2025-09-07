@@ -32,34 +32,81 @@
 <body class="bg-white font-['Inter']">
     <header class="header ">
         <nav class="navbar  bg-green-700 flex flex-row justify-around items-center px-6 py-4 h-16">
+            <!-- change popover-1 and --anchor-1 names. Use unique names for each dropdown -->
+            <div class="dropdown hidden  relative">
+                <button class="btn bg-green-600 text-white" popovertarget="popover-1" style="anchor-name:--anchor-1">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm" popover id="popover-1"
+                    style="position-anchor:--anchor-1">
+                   
+                    <li><a>About Us</a></li>
+                    <li><a>Gallery</a></li>
+                </ul>
+            </div>
+
             <div class="logo">
                 <h1 class="w-32 h-4 text-white text-xl mb-3">Green Earth</h1>
             </div>
             <ul class="nav-links inline-flex justify-start items-center gap-6 ">
                 <li class="justify-start text-white text-base font-medium font-['Inter']"><a href="#">About Us</a></li>
                 <li class="justify-start text-white text-base font-medium font-['Inter']"><a href="#">Gallery</a></li>
-                <li class="justify-start text-white text-base font-medium font-['Inter']"><a href="#">Plant a Tree</a></li>
-                
+                <li class="justify-start text-white text-base font-medium font-['Inter']"><a href="#">Plant a Tree</a>
+                </li>
+
             </ul>
             <div class="menu-icon">
-                <button class=" bg-yellow-300 text-green-700 px-5 py-2 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Plant a Tree</button>
+                <button
+                    class=" bg-yellow-300 text-green-700 px-5 py-2 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Plant
+                    a Tree</button>
             </div>
         </nav>
-        <section class="w-[1920px] h-96 bg-emerald-100 flex flex-row justify-around items-center">
-                <div class="sideleaf"><img src="./assets/hero-leaf1.png" alt=""></div>
-                <div class="herobanner justify-center text-center gap-3 flex flex-col items-center">
-                    <h1 class="text-5xl font-bold text-green-700 mb-4">Plant a Tree, Grow a Future</h1>
-                    <p class="text-lg text-green-900 mb-6">Join our mission to plant 1 million trees and make the Earth greener for future generation</p>
-                    <button class=" bg-yellow-300 text-green-700 px-6 py-3 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Get Involved</button>
-                </div>
-                <div class="sideleaf"><img src="./assets/hero-leaf2.png" alt=""></div>
+        <section class="w-auto h-auto bg-emerald-100 flex flex-row justify-around items-center">
+            <div class="sideleaf"><img src="./assets/hero-leaf1.png" alt=""></div>
+            <div class="herobanner justify-center text-center gap-3 flex flex-col items-center">
+                <h1 class="text-5xl font-bold text-green-700 mb-4">Plant a Tree, Grow a Future</h1>
+                <p class="text-lg text-green-900 mb-6">Join our mission to plant 1 million trees and make the Earth
+                    greener for future generation</p>
+                <button
+                    class=" bg-yellow-300 text-green-700 px-6 py-3 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Get
+                    Involved</button>
+            </div>
+            <div class="sideleaf"><img src="./assets/hero-leaf2.png" alt=""></div>
         </section>
     </header>
 
 
 
-    <main>
+    <main class="main mt-24 flex flex-row gap-6  ">
+        <section class="treeCategories w-64 inline-flex flex-col justify-start items-start gap-4">
+            <h1 class="self-stretch justify-start text-black text-xl font-semibold  leading-7">Categories</h1>
+            <ul class="self-stretch flex flex-col justify-start items-start">
+                <div
+                    class="self-stretch px-2.5 py-2 bg-green-700 rounded inline-flex justify-start items-center gap-2.5">
+                    <p class="justify-start text-white text-base font-medium font-['Inter']">All Trees</p>
+                </div>
+            </ul>
 
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+
+        <section class="treeCard">
+
+        </section>
+
+        <section class="addCart">
+
+        </section>
     </main>
 
 
