@@ -29,7 +29,7 @@
     </style>
 </head>
 
-<body class="bg-white font-['Inter']">
+<body class="bg-[#F0FDF4]  font-['Inter'] ">
     <header class="header ">
         <nav class="navbar  bg-green-700 flex flex-row justify-around items-center px-6 py-4 h-16">
             <!-- change popover-1 and --anchor-1 names. Use unique names for each dropdown -->
@@ -39,7 +39,7 @@
                 </button>
                 <ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm" popover id="popover-1"
                     style="position-anchor:--anchor-1">
-                   
+
                     <li><a>About Us</a></li>
                     <li><a>Gallery</a></li>
                 </ul>
@@ -75,36 +75,103 @@
         </section>
     </header>
 
+    <section
+        class="mt-24 mb-10 self-stretch text-center justify-start text-gray-800 text-3xl font-semibold font-['Inter'] leading-10">
+        <h1>Choose Your Trees</h1>
+    </section>
 
+    <main class="main mt-2 gap-8 flex flex-row bg-[#F0FDF4]   px-[150px] justify-between">
 
-    <main class="main mt-24 flex flex-row gap-6  ">
-        <section class="treeCategories w-64 inline-flex flex-col justify-start items-start gap-4">
+        <!--category-->
+
+        <section class="treeCategories w-[15%] bg inline-flex flex-col justify-start items-start gap-4">
             <h1 class="self-stretch justify-start text-black text-xl font-semibold  leading-7">Categories</h1>
-            <ul class="self-stretch flex flex-col justify-start items-start">
+            <ul class="self-stretch flex flex-col justify-start items-start" id="categoryList">
                 <div
                     class="self-stretch px-2.5 py-2 bg-green-700 rounded inline-flex justify-start items-center gap-2.5">
                     <p class="justify-start text-white text-base font-medium font-['Inter']">All Trees</p>
                 </div>
             </ul>
+        </section>
 
 
+        <!--card-->
 
 
+        <section class="treeCard w-[70%]">
 
+            <div id="treeCardContainer" class=" grid grid-cols-3 gap-7">
+                <!-- Card 1 -->
+                <div class="self-stretch p-4 bg-white rounded-lg inline-flex flex-col justify-start items-start gap-3">
+                    <img src="./assets/about.png" alt="card" class="self-stretch h-48 bg-gray-200 rounded-lg">
+                    <div class="self-stretch inline-flex justify-start items-center gap-3">
+                        <div class="flex-1 inline-flex flex-col justify-start items-start gap-2">
+                            <h1
+                                class="self-stretch justify-start text-gray-800 text-sm font-semibold font-['Inter'] leading-tight">
+                                Mango Tree</h1>
+                            <p
+                                class="self-stretch opacity-80 justify-start text-gray-800 text-xs font-normal font-['Inter'] leading-none">
+                                A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its
+                                dense green</p>
+                            <div class="mt-3 self-stretch inline-flex justify-start items-center gap-2">
+                                <div
+                                    class="px-3 py-1 bg-green-100 rounded-[400px] inline-flex flex-col justify-center items-center gap-2.5">
+                                    <div class="inline-flex justify-center items-center gap-2.5">
+                                        <p
+                                            class="justify-start text-green-700 text-sm font-medium font-['Inter'] leading-tight">
+                                            Fruit Tree</p>
+                                    </div>
+                                </div>
+                                <p
+                                    class="flex-1 text-right justify-start text-gray-800 text-sm font-semibold font-['Bengali Noto serif'] leading-tight">
+                                    ৳500</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="self-stretch px-5 py-3 bg-green-700 rounded-[999px] inline-flex justify-center items-center gap-2.5">
+                        <p class="justify-start text-white text-base font-medium font-['Inter']">Add to Cart</p>
+                    </button>
+                </div>
 
-
-
-
-
-
+            </div>
 
         </section>
 
-        <section class="treeCard">
+        <!--add to cart-->
 
-        </section>
 
-        <section class="addCart">
+        <section class="addCart w-[15%]">
+            <div class="w-64 self-stretch p-4 bg-white rounded-2xl inline-flex flex-col justify-start items-start gap-2">
+                <h1 class="self-stretch justify-start text-black text-xl font-semibold font-['Inter'] leading-7">Your
+                    Cart</h1>
+
+                <!-- Cart Item 1 -->
+                <div
+                    class="self-stretch px-3 py-2 bg-green-50 rounded-lg inline-flex justify-start items-center gap-2.5">
+                    <div class="flex-1 inline-flex flex-col justify-start items-start gap-1">
+                        <p
+                            class="self-stretch justify-start text-gray-800 text-sm font-semibold font-['Inter'] leading-tight">
+                            Mango Tree</p>
+                        <p
+                            class="opacity-50 justify-start text-gray-800 text-base font-normal font-['Inter'] leading-normal">
+                            ৳500 x 1</p>
+                    </div>
+                    <button class="w-4 h-4 relative overflow-hidden hover:bg-red-100 rounded transition-colors">
+                        <div class="w-2.5 h-2.5 left-[3.33px] top-[3.33px] absolute bg-neutral-400"></div>
+                    </button>
+                </div>
+
+                <!-- Divider -->
+                <div class="self-stretch h-0 opacity-10 outline outline-1 outline-offset-[-0.50px] outline-gray-800">
+                </div>
+
+                <!-- Total -->
+                <div class="self-stretch inline-flex justify-start items-start gap-2">
+                    <p class="flex-1 justify-start text-gray-800 text-base font-medium font-['Inter']">Total:</p>
+                    <p class="justify-start text-gray-800 text-base font-medium font-['Inter']">৳1000</p>
+                </div>
+            </div>
 
         </section>
     </main>
