@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.dropdown{
+.dropdown {
     display: none;
 }
 
@@ -11,54 +11,92 @@
         flex-direction: row;
         align-items: center;
         text-align: center;
-        gap: 10px;
-        padding: 10px;
+        gap: 6px;
+        padding: 5px;
     }
+
     .nav-links {
-        flex-direction: column;
-        gap: 10px;
+        
         display: none;
     }
+
     .dropdown {
         display: block;
     }
-    .logo h1{
+
+    .logo h1 {
         font-size: 1.2rem !important;
     }
-    .menu-icon{
-        display: block;
+
+    .menu-icon {
+        margin-right: 40px;
         cursor: pointer;
-        font-size: 0.8rem;
-        padding: 4px 8px;
+        font-size: 0.75rem;
+        padding: 2px 4px;
     }
 
-
-    .herobanner{
+    .heroBanneContainer{
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+    .herobanner {
         flex-direction: column;
         text-align: center;
         padding: 20px;
         margin-bottom: 10px;
         margin-top: 20px;
     }
+
     .herobanner img {
         width: 100%;
         height: auto;
         max-width: 400px;
     }
-    .herobanner h1{
+
+    .herobanner h1 {
         font-size: 1.8rem !important;
     }
-    .herobanner p{
+
+    .herobanner p {
         font-size: 0.9rem !important;
     }
-    .herobanner button{
+
+    .herobanner button {
         width: 30% !important;
         margin: 10px auto;
         font-size: 11px;
         padding: 10px 14px;
-        
+
     }
-    .sideleaf{
+
+    .sideleaf {
+        display: block;
+    }
+
+    .main {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .treeCategories {
+        width: 100%;
+        order: 1;
+    }
+
+    .treeCard {
+        width: 100%;
+        order: 2;
+    }
+
+    .treeCard .grid {
+        grid-template-columns: 1fr;
+       
+    }
+
+    .addCart {
         display: none;
+        width: 100%;
+        order: 3;
     }
 }

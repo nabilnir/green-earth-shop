@@ -42,6 +42,7 @@
 
                     <li><a>About Us</a></li>
                     <li><a>Gallery</a></li>
+                    <li><a>Plant a tree</a></li>
                 </ul>
             </div>
 
@@ -60,8 +61,81 @@
                     class=" bg-yellow-300 text-green-700 px-5 py-2 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Plant
                     a Tree</button>
             </div>
+
+
+            <!-- Mobile Cart Dropdown -->
+
+
+            <div class="fixed top-4 right-4 z-50 md:hidden">
+                <div class="dropdown dropdown-end">
+                    <!-- Cart Button -->
+                    <div tabindex="0" role="button" class="btn btn-circle bg-none hover:bg-green-800 border-none">
+                        <div class="indicator">
+                            <!-- Cart SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <!-- Cart Count Badge -->
+                            <span
+                                class="badge badge-sm indicator-item bg-green-200 text-green-700 border-none">2</span>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Content -->
+                    <div tabindex="0"
+                        class="card card-compact dropdown-content bg-green-200 z-[1] mt-3 w-72 shadow-lg border">
+                        <div class="card-body">
+                            <!-- Cart Header -->
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Your Cart</h3>
+
+                            <!-- Cart Items -->
+                            <div class="space-y-2 max-h-60 overflow-y-auto">
+                                <!-- Cart Item 1 -->
+                                <div class="flex justify-between items-center p-2 bg-green-50 rounded-lg">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-gray-800">Mango Tree</p>
+                                        <p class="text-xs text-gray-600">৳500 x 1</p>
+                                    </div>
+                                    <button class="btn btn-ghost btn-xs text-red-500 hover:bg-red-50">
+                                        ×
+                                    </button>
+                                </div>
+
+                                <!-- Cart Item 2 -->
+                                <div class="flex justify-between items-center p-2 bg-green-50 rounded-lg">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-gray-800">Guava Tree</p>
+                                        <p class="text-xs text-gray-600">৳350 x 1</p>
+                                    </div>
+                                    <button class="btn btn-ghost btn-xs text-red-500 hover:bg-red-50">
+                                        ×
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="divider my-2"></div>
+
+                            <!-- Total -->
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-medium text-gray-800">Total:</span>
+                                <span class="font-semibold text-gray-800">৳850</span>
+                            </div>
+
+                            <!-- Action Button -->
+                            <div class="card-actions">
+                                <button class="btn bg-green-700 text-white hover:bg-green-800 btn-block">
+                                    View Full Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
-        <section class="w-auto h-auto bg-emerald-100 flex flex-row justify-around items-center">
+        <section class="heroBanneContainer w-auto h-auto bg-emerald-100 flex flex-row justify-around items-center">
             <div class="sideleaf"><img src="./assets/hero-leaf1.png" alt=""></div>
             <div class="herobanner justify-center text-center gap-3 flex flex-col items-center">
                 <h1 class="text-5xl font-bold text-green-700 mb-4">Plant a Tree, Grow a Future</h1>
@@ -142,7 +216,8 @@
 
 
         <section class="addCart w-[15%]">
-            <div class="w-64 self-stretch p-4 bg-white rounded-2xl inline-flex flex-col justify-start items-start gap-2">
+            <div
+                class="w-64 self-stretch p-4 bg-white rounded-2xl inline-flex flex-col justify-start items-start gap-2">
                 <h1 class="self-stretch justify-start text-black text-xl font-semibold font-['Inter'] leading-7">Your
                     Cart</h1>
 
