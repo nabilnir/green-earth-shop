@@ -63,29 +63,32 @@
             </div>
 
 
+
+
             <!-- Mobile Cart Dropdown -->
 
 
-            <div class="fixed top-3 right-3 z-50 md:hidden">
-                <div class="dropdown dropdown-end">
-                    <!-- Cart Button -->
-                    <div tabindex="0" role="button" class="btn btn-circle bg-none hover:bg-green-800 border-none">
-                        <div class="indicator">
-                            <!-- Cart SVG Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                            <!-- Cart Count Badge -->
-                            <span class="badge badge-sm indicator-item bg-green-200 text-green-700 border-none">2</span>
-                        </div>
-                    </div>
+
+            <div class="fixed top-2 right-3 z-50 md:hidden">
+                <div class="relative">
+                    <!-- Custom Cart Button -->
+                    <button id="cartButton"
+                        class="cart-btn bg-green-700 hover:bg-green-800 text-white w-10 h-10 rounded-full flex items-center justify-center border-none shadow-md transition-all duration-300 relative">
+                        <!-- Cart Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <!-- Cart Count Badge -->
+                        <span
+                            class="cart-badge absolute -top-2 -right-2 bg-green-200 text-green-700 text-xs font-semibold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">2</span>
+                    </button>
 
                     <!-- Dropdown Content -->
-                    <div tabindex="0"
-                        class="card card-compact dropdown-content bg-green-200 z-[1] mt-3 w-72 shadow-lg border">
-                        <div class="card-body">
+                    <div id="cartDropdown"
+                        class="cart-dropdown absolute right-0 mt-3 w-72 bg-green-200 rounded-lg shadow-lg border hidden">
+                        <div class="p-4">
                             <!-- Cart Header -->
                             <h3 class="text-lg font-semibold text-gray-800 mb-3">Your Cart</h3>
 
@@ -97,7 +100,8 @@
                                         <p class="text-sm font-semibold text-gray-800">Mango Tree</p>
                                         <p class="text-xs text-gray-600">৳500 x 1</p>
                                     </div>
-                                    <button class="btn btn-ghost btn-xs text-red-500 hover:bg-red-50">
+                                    <button
+                                        class="remove-btn text-red-500 hover:bg-red-50 w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-200">
                                         ×
                                     </button>
                                 </div>
@@ -108,25 +112,43 @@
                                         <p class="text-sm font-semibold text-gray-800">Guava Tree</p>
                                         <p class="text-xs text-gray-600">৳350 x 1</p>
                                     </div>
-                                    <button class="btn btn-ghost btn-xs text-red-500 hover:bg-red-50">
+                                    <button
+                                        class="remove-btn text-red-500 hover:bg-red-50 w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-200">
+                                        ×
+                                    </button>
+                                </div>
+
+                                <!-- Cart Item 3 -->
+                                <div class="flex justify-between items-center p-2 bg-green-50 rounded-lg">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-gray-800">Jackfruit Tree</p>
+                                        <p class="text-xs text-gray-600">৳750 x 1</p>
+                                    </div>
+                                    <button
+                                        class="remove-btn text-red-500 hover:bg-red-50 w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-200">
                                         ×
                                     </button>
                                 </div>
                             </div>
 
                             <!-- Divider -->
-                            <div class="divider my-2"></div>
+                            <div class="border-t border-gray-300 opacity-30 my-3"></div>
 
                             <!-- Total -->
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-medium text-gray-800">Total:</span>
-                                <span class="font-semibold text-gray-800">৳850</span>
+                                <span class="font-semibold text-gray-800">৳1600</span>
                             </div>
 
-                            <!-- Action Button -->
-                            <div class="card-actions">
-                                <button class="btn bg-green-700 text-white hover:bg-green-800 btn-block">
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col gap-2">
+                                <button
+                                    class="w-full bg-green-700 text-white py-2 px-4 rounded-lg hover:bg-green-800 transition-colors duration-200">
                                     View Full Cart
+                                </button>
+                                <button
+                                    class="w-full bg-yellow-300 text-green-700 py-2 px-4 rounded-lg hover:bg-green-800 hover:text-yellow-300 transition-colors duration-200">
+                                    Checkout Now
                                 </button>
                             </div>
                         </div>
@@ -259,13 +281,13 @@
     <!--About Us section-->
 
     <!--About Us section-->
-    <section class="px-[150px] flex flex-col items-center gap-5 mb-24">
+    <section class="aboutUS px-[150px] flex flex-col items-center gap-5 mb-24">
         <h1
-            class="self-stretch text-center justify-start text-gray-800 text-3xl font-semibold font-['Inter'] leading-10 mt-24 mb-10">
+            class="abtUS self-stretch text-center justify-start text-gray-800 text-3xl font-semibold font-['Inter'] leading-10 mt-24 mb-10">
             About the Campaign
         </h1>
 
-        <div class="flex flex-row justify-between items-center gap-7">
+        <div class="abtDetails flex flex-row justify-between items-center gap-7">
             <img src="./assets/about.png" alt="" class="w-[530px] h-[530px] rounded-[10px] shadow-md">
             <div class="flex-1 flex flex-col justify-center gap-6">
                 <p class="justify-start text-gray-800 text-base font-normal font-['Inter'] leading-7">
@@ -290,21 +312,31 @@
             class="mb-10 self-stretch text-center justify-start text-gray-800 text-3xl font-semibold font-['Inter'] leading-10">
             Our Impact
         </h1>
-        <div class="w-full px-[150px]">
-            <div class="flex flex-row justify-center items-stretch gap-8">
-                <div
-                    class="flex-1 p-10 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.06)] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+        <div class=" w-full px-[150px]">
+
+
+            <div class="impactCtnr flex flex-row justify-center items-stretch gap-8">
+
+
+
+                <div class="impactCard flex-1 p-10 bg-white rounded-xl 
+                 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+
+
                     <div class="text-center justify-start text-green-700 text-4xl font-bold font-['Inter'] leading-10">
                         500K+
                     </div>
                     <div
-                        class="text-center justify-start text-gray-800 text-lg font-medium font-['Inter'] leading-normal">
+                        class=" text-center justify-start text-gray-800 text-lg font-medium font-['Inter'] leading-normal">
                         Trees Planted
                     </div>
+
+
                 </div>
 
-                <div
-                    class="flex-1 p-10 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.06)] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+                <div class=" impactCard flex-1 p-10 bg-white rounded-xl 
+                shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+
                     <div class="text-center justify-start text-green-700 text-4xl font-bold font-['Inter'] leading-10">
                         120+
                     </div>
@@ -314,8 +346,9 @@
                     </div>
                 </div>
 
-                <div
-                    class="flex-1 p-10 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.06)] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+                <div class=" impactCard flex-1 p-10 bg-white rounded-xl 
+                     shadow-[0px_1px_3px_0px_rgba(0,0,0,0.10)] flex flex-col justify-center items-center gap-5">
+
                     <div class="text-center justify-start text-green-700 text-4xl font-bold font-['Inter'] leading-10">
                         30+
                     </div>
@@ -330,16 +363,18 @@
 
     <!--plant a tree today-->
 
-    <section class="pt-24  pb-24 bg-green-800 self-stretch text-center justify-start text-gray-800  font-semibold font-['Inter'] leading-10 flex flex-col items-center gap-5">
-        <h1 class="text-white text-3xl">Plant a Tree Today</h1>
+    <section
+        class="plantATree pt-24  pb-24 bg-green-800 self-stretch text-center justify-start text-gray-800  font-semibold font-['Inter'] leading-10 flex flex-col items-center gap-5">
+        <h1 class="plantHead  text-white text-3xl ">Plant a Tree Today</h1>
         <div
-            class="w-[650px] p-10 bg-green-700 rounded-xl shadow-[0px_4px_22px_0px_rgba(0,0,0,0.06)] inline-flex flex-col justify-start items-center gap-5 text-base font-normal">
+            class="plantForm w-[650px] p-10 bg-green-700 rounded-xl shadow-[0px_4px_22px_0px_rgba(0,0,0,0.06)] inline-flex flex-col justify-start items-center gap-5 text-base font-normal">
             <input type="text" placeholder="Your Name"
                 class="w-full bg-white px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 text-base font-normal">
             <input type="email" placeholder="Your Email"
                 class="w-full bg-white px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
-            <select class="select w-full bg-white px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
-                <option selected disabled>Number of Trees</option>
+            <select
+                class="select w-full bg-white px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <option selected disabled class="text-gray-300">Number of Trees</option>
                 <option>1-5</option>
                 <option>5-10</option>
                 <option>10-15</option>
@@ -347,13 +382,14 @@
                 <option>20-25</option>
             </select>
             <button
-                class="w-full bg-yellow-300 text-green-700 px-6 py-3 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Donate
+                class="plantBtn w-full bg-yellow-300 text-green-700 px-6 py-3 rounded-full hover:bg-green-800 hover:text-yellow-300 transition duration-300">Donate
                 Now</button>
         </div>
     </section>
 
-    <footer class=" h-16 bg-green-900"">
-          <p class="text-center  text-white text-base font-normal font-['Inter'] leading-normal justify-center items-center pt-5">© 2025 Green Earth. All Rights Reserved.</p>
+    <footer class="footer h-16 bg-green-900"">
+          <p class=" text-center text-white text-base font-normal font-['Inter'] leading-normal justify-center
+        items-center pt-5">© 2025 Green Earth. All Rights Reserved.</p>
     </footer>
 
 

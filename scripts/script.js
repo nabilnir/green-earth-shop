@@ -37,9 +37,9 @@ const displayCategoryList = (categories) => {
     
     for (let categorie of categories) {
         const btnDiv = document.createElement("div");
-        btnDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
+        btnDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 hover:text-white rounded flex justify-start items-center gap-2.5 mb-2";
         btnDiv.innerHTML = `
-            <p class="text-gray-800 text-base hover:text-white font-medium font-['Inter']">${categorie.category_name}</p>
+            <p class="text-gray-800 text-base  font-medium font-['Inter']">${categorie.category_name}</p>
         `;
         btnDiv.onclick = function() {
             loadTreeByCategory(categorie.id); 
