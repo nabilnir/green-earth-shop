@@ -6,22 +6,64 @@ const loadCategoryList = () => {
         .then((json) => displayCategoryList(json.categories));
 }
 
+// loadTreeByCategory function
+const loadTreeByCategory = (id) => {
+    const url = `https://openapi.programming-hero.com/api/category/${id}`;
+    fetch(url)
+        .then((res) => res.json())
+        .then((json) => {
+            console.log(json); 
+            displayPlants(json.plants || json.data);
+        });
+}
 
 
 const displayCategoryList = (categories) => {
     const categoryContainer = document.getElementById("categoryList");
     categoryContainer.innerHTML = "";
 
+    
+    const allTreesDiv = document.createElement("div");
+    allTreesDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
+    allTreesDiv.innerHTML = `
+        <p class="text-white text-base font-medium font-['Inter']">All Trees</p>
+    `;
+    allTreesDiv.onclick = function() {
+        loadPlants();
+        updateActiveButton(allTreesDiv);
+    };
+    categoryContainer.append(allTreesDiv);
 
-
+    
     for (let categorie of categories) {
         const btnDiv = document.createElement("div");
-        btnDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2  rounded flex justify-start items-center gap-2.5 mb-2";
+        btnDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
         btnDiv.innerHTML = `
-            <p class="text-gray-800 text-base font-medium font-['Inter']">${categorie.category_name}</p>
+            <p class="text-gray-800 text-base hover:text-white font-medium font-['Inter']">${categorie.category_name}</p>
         `;
+        btnDiv.onclick = function() {
+            loadTreeByCategory(categorie.id); 
+            updateActiveButton(btnDiv);
+        };
         categoryContainer.append(btnDiv);
+    }
+}
 
+const updateActiveButton = (activeButton) => {
+    
+    document.querySelectorAll('.catTreeName').forEach(btn => {
+        btn.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
+        const p = btn.querySelector('p');
+        if (p) {
+            p.className = "text-gray-800 text-base hover:text-white font-medium font-['Inter']";
+        }
+    });
+    
+    
+    activeButton.className = "catTreeName w-full cursor-pointer px-2.5 py-2 bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
+    const activeP = activeButton.querySelector('p');
+    if (activeP) {
+        activeP.className = "text-white text-base font-medium font-['Inter']";
     }
 }
 
@@ -30,18 +72,18 @@ const displayCategoryList = (categories) => {
 const loadPlants = () => {
     fetch("https://openapi.programming-hero.com/api/plants")
         .then((res) => res.json())
-        .then((json) =>  displayPlants(json.plants));
+        .then((json) => displayPlants(json.plants));
 }
 
-loadPlants();
+
 
 //display cat plant cards
 
 const displayPlants = (plants) => {
-    const displayPlant = document.getElementById("treeCardContainer"); 
+    const displayPlant = document.getElementById("treeCardContainer");
     displayPlant.innerHTML = "";
 
-    for(let plant of plants) {
+    for (let plant of plants) {
         const treeCard = document.createElement("div");
         treeCard.className = "h-full"; // Ensures equal heights
         treeCard.innerHTML = `
@@ -80,5 +122,6 @@ const displayPlants = (plants) => {
 
 
 
-
+loadPlants();
 loadCategoryList();
+
