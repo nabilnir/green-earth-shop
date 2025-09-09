@@ -9,10 +9,13 @@ const loadCategoryList = () => {
 // loadTreeByCategory function
 const loadTreeByCategory = (id) => {
     const url = `https://openapi.programming-hero.com/api/category/${id}`;
+    document.getElementById("treeCardContainer").innerHTML = '<div class="col-span-3 w-full flex justify-center items-center h-64"><span class="col-span-3 w-full loading loading-dots loading-xl"></span></div>';
+
     fetch(url)
+
         .then((res) => res.json())
         .then((json) => {
-            console.log(json); 
+            console.log(json);
             displayPlants(json.plants || json.data);
         });
 }
@@ -22,27 +25,27 @@ const displayCategoryList = (categories) => {
     const categoryContainer = document.getElementById("categoryList");
     categoryContainer.innerHTML = "";
 
-    
+
     const allTreesDiv = document.createElement("div");
     allTreesDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
     allTreesDiv.innerHTML = `
         <p class="text-white text-base font-medium font-['Inter']">All Trees</p>
     `;
-    allTreesDiv.onclick = function() {
+    allTreesDiv.onclick = function () {
         loadPlants();
         updateActiveButton(allTreesDiv);
     };
     categoryContainer.append(allTreesDiv);
 
-    
+
     for (let categorie of categories) {
         const btnDiv = document.createElement("div");
         btnDiv.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 hover:text-white rounded flex justify-start items-center gap-2.5 mb-2";
         btnDiv.innerHTML = `
             <p class="text-gray-800 text-base  font-medium font-['Inter']">${categorie.category_name}</p>
         `;
-        btnDiv.onclick = function() {
-            loadTreeByCategory(categorie.id); 
+        btnDiv.onclick = function () {
+            loadTreeByCategory(categorie.id);
             updateActiveButton(btnDiv);
         };
         categoryContainer.append(btnDiv);
@@ -50,7 +53,7 @@ const displayCategoryList = (categories) => {
 }
 
 const updateActiveButton = (activeButton) => {
-    
+
     document.querySelectorAll('.catTreeName').forEach(btn => {
         btn.className = "catTreeName w-full cursor-pointer px-2.5 py-2 hover:bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
         const p = btn.querySelector('p');
@@ -58,8 +61,8 @@ const updateActiveButton = (activeButton) => {
             p.className = "text-gray-800 text-base hover:text-white font-medium font-['Inter']";
         }
     });
-    
-    
+
+
     activeButton.className = "catTreeName w-full cursor-pointer px-2.5 py-2 bg-green-700 rounded flex justify-start items-center gap-2.5 mb-2";
     const activeP = activeButton.querySelector('p');
     if (activeP) {
@@ -70,6 +73,8 @@ const updateActiveButton = (activeButton) => {
 //load catCard
 
 const loadPlants = () => {
+    document.getElementById("treeCardContainer").innerHTML =
+        '<div class="col-span-3 w-full flex justify-center items-center h-64"><span class="col-span-3 w-full loading loading-dots loading-xl"></span></div>';
     fetch("https://openapi.programming-hero.com/api/plants")
         .then((res) => res.json())
         .then((json) => displayPlants(json.plants));
@@ -85,16 +90,16 @@ const displayPlants = (plants) => {
 
     for (let plant of plants) {
         const treeCard = document.createElement("div");
-        treeCard.className = "h-full"; // Ensures equal heights
+        treeCard.className = "h-full";
         treeCard.innerHTML = `
             <div class="h-full self-stretch p-4 bg-white rounded-lg flex flex-col justify-between items-start gap-3">
                 <img src="${plant.image}" alt="card" class="self-stretch h-48 rounded-lg object-cover">
                 <div class="self-stretch inline-flex justify-start items-center gap-3">
                     <div class="flex-1 inline-flex flex-col justify-start items-start gap-2">
-                        <h1 class="self-stretch justify-start text-gray-800 text-lg font-semibold font-['Inter'] leading-tight">
+                        <h1 onclick ="displayModal(${plant.id})" class="cursor-pointer self-stretch justify-start text-gray-800 text-lg font-semibold font-['Inter'] leading-tight">
                             ${plant.name}
                         </h1>
-                        <p class="self-stretch opacity-80 justify-start text-gray-800 text-md font-normal font-['Inter'] leading-none">
+                        <p class="self-stretch opacity-80 justify-start text-gray-800 text-md font-normal font-['Inter'] leading-none line-clamp-3 overflow-hidden">
                             ${plant.description}
                         </p>
                         <div class="mt-3 self-stretch inline-flex justify-start items-center gap-2">
@@ -111,7 +116,9 @@ const displayPlants = (plants) => {
                         </div>
                     </div>
                 </div>
-                <button class="self-stretch px-5 py-3 bg-green-700 rounded-[999px] inline-flex justify-center items-center gap-2.5">
+               <button onclick ="addToCart({id: ${plant.id}, name: '${plant.name}', price: ${plant.price}})" class="addCartBtn 
+                self-stretch px-5 py-3 bg-green-700 rounded-[999px] inline-flex justify-center items-center gap-2.5 cursor-pointer
+                 hover:bg-green-800 transition-colors duration-200">
                     <p class="justify-start text-white text-base font-medium font-['Inter']">Add to Cart</p>
                 </button>
             </div>
@@ -121,7 +128,223 @@ const displayPlants = (plants) => {
 }
 
 
+//load modal
+
+const displayModal = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+    document.getElementById("modalContent").innerHTML = '<div class="col-span-3 w-full loading-spinner"><span class="loading loading-dots loading-xl"></span></div>';
+    const res = await fetch(url);
+    const data = await res.json();
+    const plant = data.plants;
+
+    const modalContent = document.getElementById("modalContent");
+    modalContent.innerHTML = `
+        <h2 class="text-xl font-bold mb-2">${plant.name}</h2>
+        <img src="${plant.image}" alt="${plant.name}" class="w-full self-stretch h-60 object-cover rounded-xl mb-4">
+        <p class="mb-2"><strong>Category:</strong> ${plant.category}</p>
+        <p class="mb-2"><strong>Price:</strong> ৳${plant.price}</p>
+        <p class="mb-10"><strong>Description:</strong> ${plant.description}</p>
+        <form method="dialog" class="absolute right-5 bottom-4">
+            <button class="btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded ">Close</button>
+        </form>
+    `;
+
+    document.getElementById("plant_modal").showModal();
+}
+
+//cart Update
+
+let cartItems = {};
+
+function addToCart(plant) {
+
+
+    const cartContainer = document.getElementById("cartContainer");
+
+    if (cartItems[plant.id]) {
+        cartItems[plant.id].quantity += 1;
+        updateCartItemDisplay(plant.id);
+    }
+    else {
+        cartItems[plant.id] = {
+            name: plant.name,
+            price: plant.price,
+            quantity: 1
+        };
+
+        const cartItem = document.createElement("div");
+        cartItem.className = "w-full px-3 py-2 bg-green-50 rounded-lg flex justify-between items-center";
+        cartItem.id = `cart-item-${plant.id}`;
+        cartItem.innerHTML = `
+            <div class="flex-1 inline-flex flex-col justify-start items-start gap-1">
+                <p class="w-full justify-start text-gray-800 text-sm font-semibold font-['Inter'] leading-tight">
+                    ${plant.name}
+                </p>
+                <p class="cartPrice w-full opacity-50 justify-start text-gray-800 text-base font-normal font-['Inter'] leading-normal">
+                    ৳${plant.price} x <span class="quantity">1</span>
+                </p>
+            </div>
+            <button onclick="removeFromCart(${plant.id})" class="ml-2 w-6 h-6 flex items-center justify-center text-red-500 hover:bg-red-100 rounded-full transition-colors cursor-pointer flex-shrink-0">
+                ×
+            </button>
+        `;
+
+        cartContainer.appendChild(cartItem);
+    }
+
+    updateCartTotal();
+    updateMobileCart();
+
+}
+
+
+
+
+//addCart calculation
+
+function updateCartItemDisplay(plantId) {
+    const cartItem = document.getElementById(`cart-item-${plantId}`);
+    const quantitySpan = cartItem.querySelector(".quantity");
+    quantitySpan.textContent = cartItems[plantId].quantity;
+}
+
+function removeFromCart(plantId) {
+    delete cartItems[plantId];
+    document.getElementById(`cart-item-${plantId}`).remove();
+    updateCartTotal();
+    updateMobileCart();
+}
+
+
+function removeFromCartMobile(plantId) {
+    delete cartItems[plantId];
+    document.getElementById(`cart-item-${plantId}`).remove();
+    updateCartTotal();
+    updateMobileCart();
+}
+
+
+function updateCartTotal() {
+    const cartPrices = parseInt(document.querySelectorAll(".cartPrice").innerText);
+    let total = 0;
+    for (let itemId in cartItems) {
+        const item = cartItems[itemId];
+        total += item.price * item.quantity;
+    }
+
+    const totalUpdate = document.getElementById("cartTOtal");
+    totalUpdate.innerText = `৳${total}`;
+
+}
+
+
+// mobile cart 
+
+
+function updateMobileCart() {
+    const mobileCartContainer = document.getElementById("mobileCartContainer");
+    const cartBadge = document.getElementById("cartIconBadge");
+    const mobileTotal = document.getElementById("mblCartTotal");
+
+
+    mobileCartContainer.innerHTML = '';
+
+    let itemCount = 0;
+    let total = 0;
+
+
+    for (let itemId in cartItems) {
+        const item = cartItems[itemId];
+        itemCount += item.quantity;
+        total += item.price * item.quantity;
+
+        const mobileCartItem = document.createElement('div');
+        mobileCartItem.className = 'flex justify-between items-center p-2 bg-green-50 rounded-lg';
+        mobileCartItem.innerHTML = `
+            <div class="flex-1">
+                  <p class="text-sm font-semibold text-gray-800">${item.name}</p>
+                  <p class="text-xs text-gray-600">৳${item.price} x ${item.quantity}</p>
+             </div>
+                <button onclick="removeFromCartMobile(${itemId})" 
+                   class="remove-btn text-red-500 hover:bg-red-50 w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-200">
+                    ×
+                </button>
+        `;
+        mobileCartContainer.appendChild(mobileCartItem);
+    }
+
+    // Update cart badge
+    if (cartBadge) {
+        cartBadge.textContent = itemCount;
+        cartBadge.style.display = itemCount > 0 ? 'flex' : 'none';
+    }
+
+    // Update mobile total
+    if (mobileTotal) {
+        mobileTotal.textContent = `৳${total}`;
+    }
+
+
+    if (itemCount === 0) {
+        mobileCartContainer.innerHTML = '<p class="text-center text-gray-500 py-4">Your cart is empty</p>';
+        if (cartBadge) {
+            cartBadge.style.display = 'none';
+        }
+    }
+}
+
+
+
+
+//  mobile cart toggle functionality
+
+
+
+
+function initMobileCart() {
+    const cartButton = document.getElementById('cartButton');
+    const cartDropdown = document.getElementById('cartDropdown');
+
+    if (cartButton && cartDropdown) {
+        cartButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Toggle dropdown visibility
+            const isHidden = cartDropdown.classList.contains('hidden');
+            if (isHidden) {
+                cartDropdown.classList.remove('hidden');
+                cartDropdown.style.display = 'block';
+            } else {
+                cartDropdown.classList.add('hidden');
+                cartDropdown.style.display = 'none';
+            }
+        });
+
+
+        cartDropdown.addEventListener('click', function (event) {
+            event.stopPropagation();
+
+
+            if (event.target.classList.contains('remove-btn') || event.target.closest('.remove-btn')) {
+
+                const button = event.target.closest('.remove-btn');
+
+            }
+        });
+
+
+        document.addEventListener('click', function (event) {
+            if (!cartDropdown.contains(event.target) && !cartButton.contains(event.target)) {
+                cartDropdown.classList.add('hidden');
+                cartDropdown.style.display = 'none';
+            }
+        });
+    }
+}
+
+
 
 loadPlants();
 loadCategoryList();
-
+initMobileCart();
