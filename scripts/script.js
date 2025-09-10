@@ -157,9 +157,13 @@ const displayModal = async (id) => {
 let cartItems = {};
 
 function addToCart(plant) {
-
-
     const cartContainer = document.getElementById("cartContainer");
+
+    
+    const emptyMessage = cartContainer.querySelector('p');
+    if (emptyMessage && emptyMessage.textContent.includes('Your cart is empty')) {
+        emptyMessage.remove();
+    }
 
     if (cartItems[plant.id]) {
         cartItems[plant.id].quantity += 1;
@@ -194,7 +198,6 @@ function addToCart(plant) {
 
     updateCartTotal();
     updateMobileCart();
-
 }
 
 const priceElement = document.getElementById("mblCartTotalPrice");
@@ -218,6 +221,20 @@ function removeFromCart(plantId) {
     document.getElementById(`cart-item-${plantId}`).remove();
     updateCartTotal();
     updateMobileCart();
+    updateDesktopCartDisplay();
+}
+
+function updateDesktopCartDisplay() {
+    const cartContainer = document.getElementById("cartContainer");
+    const itemCount = Object.keys(cartItems).length;
+
+    if (itemCount === 0) {
+        
+        const existingEmptyMessage = cartContainer.querySelector('p');
+        if (!existingEmptyMessage || !existingEmptyMessage.textContent.includes('Your cart is empty')) {
+            cartContainer.innerHTML = '<p class="text-center text-gray-500 py-4">Your cart is empty</p>';
+        }
+    }
 }
 
 
@@ -239,6 +256,8 @@ function updateCartTotal() {
 
     const totalUpdate = document.getElementById("cartTOtal");
     totalUpdate.innerText = ` : ৳${total}`;
+
+
 
 }
 
@@ -371,4 +390,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 loadPlants();
 loadCategoryList();
-initMobileCart();
