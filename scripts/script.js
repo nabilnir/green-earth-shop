@@ -82,7 +82,7 @@ const loadPlants = () => {
 
 
 
-//display cat plant cards
+//display cart plant cards
 
 const displayPlants = (plants) => {
     const displayPlant = document.getElementById("treeCardContainer");
@@ -200,12 +200,14 @@ function addToCart(plant) {
 
 
 
-//addCart calculation
+//addCart calculation and fuctionality
 
 function updateCartItemDisplay(plantId) {
     const cartItem = document.getElementById(`cart-item-${plantId}`);
     const quantitySpan = cartItem.querySelector(".quantity");
     quantitySpan.textContent = cartItems[plantId].quantity;
+
+    attachCartDropdownClickStopPropagation();
 }
 
 function removeFromCart(plantId) {
@@ -259,13 +261,13 @@ function updateMobileCart() {
         total += item.price * item.quantity;
 
         const mobileCartItem = document.createElement('div');
-        mobileCartItem.className = 'flex justify-between items-center p-2 bg-green-50 rounded-lg';
+        mobileCartItem.className = 'flex justify-between items-center p-2 bg-green-50 rounded-lg mb-2';
         mobileCartItem.innerHTML = `
             <div class="flex-1">
                   <p class="text-sm font-semibold text-gray-800">${item.name}</p>
                   <p class="text-xs text-gray-600">৳${item.price} x ${item.quantity}</p>
              </div>
-                <button onclick="removeFromCartMobile(${itemId})" 
+                <button onclick="removeFromCart(${itemId})" 
                    class="remove-btn text-red-500 hover:bg-red-50 w-6 h-6 rounded-full flex items-center justify-center transition-colors duration-200">
                     ×
                 </button>
@@ -273,13 +275,13 @@ function updateMobileCart() {
         mobileCartContainer.appendChild(mobileCartItem);
     }
 
-    // Update cart badge
+   
     if (cartBadge) {
         cartBadge.textContent = itemCount;
         cartBadge.style.display = itemCount > 0 ? 'flex' : 'none';
     }
 
-    // Update mobile total
+    
     if (mobileTotal) {
         mobileTotal.textContent = `৳${total}`;
     }
@@ -301,48 +303,68 @@ function updateMobileCart() {
 
 
 
-function initMobileCart() {
-    const cartButton = document.getElementById('cartButton');
+function attachCartDropdownClickStopPropagation() {
     const cartDropdown = document.getElementById('cartDropdown');
-
-    if (cartButton && cartDropdown) {
-        cartButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            // Toggle dropdown visibility
-            const isHidden = cartDropdown.classList.contains('hidden');
-            if (isHidden) {
-                cartDropdown.classList.remove('hidden');
-                cartDropdown.style.display = 'block';
-            } else {
-                cartDropdown.classList.add('hidden');
-                cartDropdown.style.display = 'none';
-            }
-        });
-
-
+    if (cartDropdown) {
         cartDropdown.addEventListener('click', function (event) {
             event.stopPropagation();
-
-
-            if (event.target.classList.contains('remove-btn') || event.target.closest('.remove-btn')) {
-
-                const button = event.target.closest('.remove-btn');
-
-            }
         });
-
-
-        document.addEventListener('click', function (event) {
-            if (!cartDropdown.contains(event.target) && !cartButton.contains(event.target)) {
-                cartDropdown.classList.add('hidden');
-                cartDropdown.style.display = 'none';
-            }
+        
+        cartDropdown.addEventListener('pointerdown', function (event) {
+            event.stopPropagation();
         });
-    }
+            }
 }
 
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+            const cartButton = document.getElementById('cartButton');
+            const cartDropdown = document.getElementById('cartDropdown');
+            
+            if (cartButton && cartDropdown) {
+                
+                cartButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                   
+                    if (cartDropdown.classList.contains('hidden')) {
+                        
+                        cartDropdown.classList.remove('hidden');
+                        
+                        void cartDropdown.offsetWidth;
+                        cartDropdown.classList.add('show');
+                    } else {
+                       
+                        cartDropdown.classList.remove('show');
+                       
+                        setTimeout(() => {
+                            if (!cartDropdown.classList.contains('show')) {
+                                cartDropdown.classList.add('hidden');
+                            }
+                        }, 200);
+                    }
+                });
+                
+                
+                document.addEventListener('click', function(e) {
+                    if (!cartDropdown.contains(e.target) && !cartButton.contains(e.target)) {
+                        cartDropdown.classList.remove('show');
+                        setTimeout(() => {
+                            if (!cartDropdown.classList.contains('show')) {
+                                cartDropdown.classList.add('hidden');
+                            }
+                        }, 200);
+                    }
+                });
+                
+               
+                cartDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
 
 
 loadPlants();
