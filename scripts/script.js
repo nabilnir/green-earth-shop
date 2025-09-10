@@ -289,7 +289,7 @@ function updateMobileCart() {
         } else {
             
             mobileTotal.innerHTML = `
-                <span style="font-weight: 500; color: #1f2937;">Total:</span>
+                
                 <span style="font-weight: 600; color: #1f2937;">৳${total}</span>
             `;
         }
