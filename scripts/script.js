@@ -160,6 +160,12 @@ function addToCart(plant) {
     const cartContainer = document.getElementById("cartContainer");
     
     
+    const emptyCartHead = document.getElementById("emptyCartHead");
+    if (emptyCartHead) {
+        emptyCartHead.style.display = "none";
+    }
+
+    
     const emptyMessage = cartContainer.querySelector('p');
     if (emptyMessage && emptyMessage.textContent.includes('Your cart is empty')) {
         emptyMessage.remove();
@@ -168,8 +174,7 @@ function addToCart(plant) {
     if (cartItems[plant.id]) {
         cartItems[plant.id].quantity += 1;
         updateCartItemDisplay(plant.id);
-    }
-    else {
+    } else {
         cartItems[plant.id] = {
             name: plant.name,
             price: plant.price,
@@ -198,6 +203,25 @@ function addToCart(plant) {
 
     updateCartTotal();
     updateMobileCart();
+}
+
+function updateDesktCartDisplay() {
+    const cartContainer = document.getElementById("cartContainer");
+    const itemCount = Object.keys(cartItems).length;
+
+    if (itemCount === 0) {
+        
+        const emptyCartHead = document.getElementById("emptyCartHead");
+        if (emptyCartHead) {
+            emptyCartHead.style.display = "block";
+        } else {
+            
+            const existingEmptyMessage = cartContainer.querySelector('p');
+            if (!existingEmptyMessage || !existingEmptyMessage.textContent.includes('Your cart is empty')) {
+                cartContainer.innerHTML = '<h1 id="emptyCartHead" class="justify-center items-center text-center text-gray-500 py-4">Your Cart is empty</h1>';
+            }
+        }
+    }
 }
 
 
