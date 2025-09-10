@@ -283,7 +283,7 @@ function updateMobileCart() {
 
     
     if (mobileTotal) {
-        mobileTotal.textContent = `৳${total}`;
+        mobileTotal.textContent = `Total:৳${total}`;
     }
 
     if (itemCount === 0) {
