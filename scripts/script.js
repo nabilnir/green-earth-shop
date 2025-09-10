@@ -158,8 +158,8 @@ let cartItems = {};
 
 function addToCart(plant) {
     const cartContainer = document.getElementById("cartContainer");
-
-    // Clear empty cart message when adding first item
+    
+    
     const emptyMessage = cartContainer.querySelector('p');
     if (emptyMessage && emptyMessage.textContent.includes('Your cart is empty')) {
         emptyMessage.remove();
