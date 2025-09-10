@@ -159,7 +159,7 @@ let cartItems = {};
 function addToCart(plant) {
     const cartContainer = document.getElementById("cartContainer");
 
-    
+    // Clear empty cart message when adding first item
     const emptyMessage = cartContainer.querySelector('p');
     if (emptyMessage && emptyMessage.textContent.includes('Your cart is empty')) {
         emptyMessage.remove();
@@ -200,10 +200,7 @@ function addToCart(plant) {
     updateMobileCart();
 }
 
-const priceElement = document.getElementById("mblCartTotalPrice");
-if (priceElement) {
-    priceElement.textContent = `৳${total}`;
-}
+
 
 
 //addCart calculation and fuctionality
@@ -237,7 +234,6 @@ function updateDesktopCartDisplay() {
     }
 }
 
-
 function removeFromCartMobile(plantId) {
     delete cartItems[plantId];
     document.getElementById(`cart-item-${plantId}`).remove();
@@ -255,9 +251,7 @@ function updateCartTotal() {
     }
 
     const totalUpdate = document.getElementById("cartTOtal");
-    totalUpdate.innerText = ` : ৳${total}`;
-
-
+    totalUpdate.innerText = `৳${total}`;
 
 }
 
@@ -305,8 +299,12 @@ function updateMobileCart() {
 
     
     if (mobileTotal) {
-        mobileTotal.textContent = `Total:৳${total}`;
+        mobileTotal.innerHTML = `<div class = "justify-between">
+                            <span style="font-weight: 500; color: #1f2937;">Total:        </span>
+                            <span style="font-weight: 600; color: #1f2937;">৳${total}</span>
+                        </div>`;
     }
+
 
     if (itemCount === 0) {
         mobileCartContainer.innerHTML = '<p class="text-center text-gray-500 py-4">Your cart is empty</p>';
@@ -390,3 +388,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 loadPlants();
 loadCategoryList();
+
