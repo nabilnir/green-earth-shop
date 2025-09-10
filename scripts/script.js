@@ -197,7 +197,10 @@ function addToCart(plant) {
 
 }
 
-
+const priceElement = document.getElementById("mblCartTotalPrice");
+if (priceElement) {
+    priceElement.textContent = `৳${total}`;
+}
 
 
 //addCart calculation and fuctionality
