@@ -235,7 +235,7 @@ function updateCartTotal() {
     }
 
     const totalUpdate = document.getElementById("cartTOtal");
-    totalUpdate.innerText = `Total : ৳${total}`;
+    totalUpdate.innerText = ` : ৳${total}`;
 
 }
 
