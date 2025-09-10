@@ -283,18 +283,8 @@ function updateMobileCart() {
 
     
     if (mobileTotal) {
-        const priceSpan = mobileTotal.querySelector('span:last-child');
-        if (priceSpan) {
-            priceSpan.textContent = `৳${total}`;
-        } else {
-            
-            mobileTotal.innerHTML = `
-                
-                <span style="font-weight: 600; color: #1f2937;">৳${total}</span>
-            `;
-        }
+        mobileTotal.textContent = `৳${total}`;
     }
-
 
     if (itemCount === 0) {
         mobileCartContainer.innerHTML = '<p class="text-center text-gray-500 py-4">Your cart is empty</p>';
